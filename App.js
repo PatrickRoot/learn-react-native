@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, Platform} from 'react-native';
 import {Toast} from 'antd-mobile';
 import LoginPage from "./src/LoginPage";
 import LoadingPage from "./src/LoadingPage";
@@ -73,11 +73,16 @@ export default class App extends React.Component {
     }
 }
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#F5FCFF',
+        ...Platform.select({
+            ios: {
+                paddingTop: 20
+            },
+        }),
     },
 });
