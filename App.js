@@ -9,7 +9,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Button onClick={this.showToast.bind(this)}>Show Toast</Button>
+        <Button onClick={()=> Toast.success('Button Clicked!', 1)}>Show Toast</Button>
         <Text>Open up App.js to start working on your app!</Text>
         <Text>Changes you make will automatically reload.</Text>
         <Text>Shake your phone to open the developer menu.</Text>
