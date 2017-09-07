@@ -85,7 +85,10 @@ class LoginPage extends Component {
                 }}>
                     <Image source={require('./images/ebidding.png')}/>
                 </View>
-                <View style={{marginTop: 80}}>
+                <View style={{
+                    marginTop: 40,
+                    width: "80%",
+                }}>
                     <TextInput style={LoginStyles.loginInput}
                                placeholder="用户名/手机号"
                                onChangeText={(text) => this.setState({username: text})}
