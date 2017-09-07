@@ -6,7 +6,7 @@ import {
     Image,
     Button,
     View,
-    AsyncStorage
+    AsyncStorage,
 } from 'react-native';
 
 class LoadingPage extends Component {
@@ -20,13 +20,22 @@ class LoadingPage extends Component {
     render() {
         //表单中必需的
         return (
-            <View>
+            <View style={styles.container}>
                 <Text>这里是启动页</Text>
                 <Text>放个有Big的图片</Text>
             </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
+    },
+});
 
 LoadingPage.checkLogin = function (callback) {
     AsyncStorage.getItem("accessToken", (error, result) => {

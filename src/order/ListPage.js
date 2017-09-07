@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 import {
     StyleSheet,
-    TextInput,
     Text,
-    Image,
     Button,
     View,
     ScrollView,
+    TouchableOpacity,
     RefreshControl,
     AsyncStorage
 } from 'react-native';
@@ -14,6 +13,10 @@ import Order from "./Order";
 import {Toast} from 'antd-mobile';
 
 class ListPage extends Component {
+    static navigationOptions = {
+        title: '订单列表',
+    };
+    
     constructor(props) {
         super(props);
         this.state = {
@@ -136,13 +139,20 @@ class ListPage extends Component {
     
     onPressCallback(){
         let that = this;
+        const {goLogin} = this.props.navigation.state.params;
         AsyncStorage.removeItem("accessToken",function (error) {
             if(error){
                 Toast.fail("退出失败", 1);
             }else{
-                that.props.goLogin("退出成功");
+                Toast.success("退出成功", 1);
+                goLogin("退出成功");
             }
         });
+    }
+    
+    pressOrder(item){
+        const {navigate} = this.props.navigation;
+        navigate('OrderDetail', {order: item});
     }
     
     render() {
@@ -167,19 +177,21 @@ class ListPage extends Component {
                     }
                     onScroll={this._onScroll.bind(this)}
                     scrollEventThrottle={50}
-                    >
+                >
                     {
                         this.state.data.map((item, index) => {
-                            return <Order key={item.id} info={item}/>;
+                            return <TouchableOpacity onPress={this.pressOrder.bind(this,item)} key={item.id}>
+                                <Order info={item}/>
+                            </TouchableOpacity>;
                         })
                     }
                 </ScrollView>
                 {
-                    this.state.loadMore?
+                    this.state.loadMore ?
                         <View style={styles.more}>
                             <Text>加载中...</Text>
                         </View>
-                    :null
+                        : null
                 }
             </View>
         )

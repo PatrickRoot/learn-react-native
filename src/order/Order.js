@@ -1,12 +1,9 @@
 import React, {Component} from 'react';
 import {
     StyleSheet,
-    TextInput,
     Text,
     Image,
-    Button,
     View,
-    AsyncStorage
 } from 'react-native';
 
 class Order extends Component {
@@ -18,28 +15,28 @@ class Order extends Component {
     render() {
         let order = this.props.info;
         let orderType = order.orderType;
-        let img = <Image style={styles.img} source={require('./images/ebidding.png')}/>;
+        let img = <Image style={styles.img} source={require('../images/ebidding.png')}/>;
         if (orderType == "1000") {
             orderType = "投标培训";
-            img = <Image style={styles.img} source={require('./images/btc.jpg')}/>
+            img = <Image style={styles.img} source={require('../images/btc.jpg')}/>
         } else if (orderType == "2000") {
             orderType = "商机订阅";
-            img = <Image style={styles.img} source={require('./images/bos.png')}/>
+            img = <Image style={styles.img} source={require('../images/bos.png')}/>
         } else if (orderType == "3000") {
             orderType = "会员专区";
-            img = <Image style={styles.img} source={require('./images/vip.jpg')}/>
+            img = <Image style={styles.img} source={require('../images/vip.jpg')}/>
         } else if (orderType == "4000") {
             orderType = "投标学苑";
-            img = <Image style={styles.img} source={require('./images/other.jpg')}/>
+            img = <Image style={styles.img} source={require('../images/other.jpg')}/>
         } else if (orderType == "6000") {
             orderType = "CA 订单";
-            img = <Image style={styles.img} source={require('./images/ca.jpg')}/>
+            img = <Image style={styles.img} source={require('../images/ca.jpg')}/>
         } else if (orderType == "9000") {
             orderType = "标点订单";
-            img = <Image style={styles.img} source={require('./images/other.jpg')}/>
+            img = <Image style={styles.img} source={require('../images/other.jpg')}/>
         }else{
             orderType = "其他";
-            img = <Image style={styles.img} source={require('./images/other.jpg')}/>
+            img = <Image style={styles.img} source={require('../images/other.jpg')}/>
         }
         
         let orderStatus = order.orderStatus;

@@ -13,6 +13,8 @@ import {Toast} from 'antd-mobile';
 const LoginStyles = StyleSheet.create({
     loginview: {
         flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
         width: "100%",
         padding: 30,
         backgroundColor: '#ffffff',
