@@ -1,3 +1,60 @@
+# <font color=red>**当前状态：集成 Redux 中**</font>
+
+# 技术栈
+
+1. [react-native](https://github.com/facebook/react-native)：[中文文档](http://reactnative.cn/)，由 Facebook 开源的跨平台开发 App 的 JS 框架，需要熟悉 ES6语法、JSX 语法、了解 React 组件的生命周期。
+2. [antd-mobile](https://mobile.ant.design/index-cn)：是 [Ant Design](https://ant.design) 的移动端的 React 实现，由阿里巴巴蚂蚁金融团队开源。包含完整移动端组件的 UI 库，兼容 React Web 和 React Native。文档完善，Demo 很全。
+3. [react-navigation](https://reactnavigation.org/)：新版本 React Native 中 navigator 组件已废弃，官方主推的替代品。实现页面跳转及路由控制功能。
+4. [redux](https://github.com/reactjs/redux)：一个可预测化的状态管理容器，用于管理和控制应用中的数据。基于 Facebook 的 Flux 架构理念实现。[中文文档](https://github.com/camsong/redux-in-chinese)
+5. [极光推送](https://github.com/jpush/jpush-react-native)：极光推送官方支持的 React Native 插件。
+6. Android 热更新等待定组件。。。
+
+# 配置环境
+
+1. 基础环境：Node.js
+2. Android 环境：
+3. IOS 环境：
+
+# 运行
+
+1. git clone 项目代码 
+2. 下载依赖库文件[第三方编译库](http://reactnative.cn/post/4301)，放入 `~/.rncache` 目录，共四个文件
+    1. boost_1_63_0.tar.gz
+    2. double-conversion-1.1.5.tar.gz
+    3. folly-2016.09.26.00.tar.gz
+    4. glog-0.3.4.tar.gz
+3. 使用 `cd XXX` 进入项目目录
+4. 运行命令：`yarn install` 安装依赖包。
+5. IOS：运行命令：`yarn run ios` 运行 ios 模拟器并运行
+6. Android：
+    1. 运行 Android 模拟器
+    2. 运行命令：`yarn run android`
+    3. 查看本机 ip 地址
+    4. 触发模拟器摇一摇，在出现的菜单上点击 `Dev Settings`
+    5. 修改`Debug server host & port for device`，填写：`本机 ip 地址:8081`
+7. 修改代码后，模拟器加载新代码：
+    1. 触发模拟器摇一摇
+    2. 在出现的菜单上点击 `Reload`
+
+
+# 参考资料
+
+1. [React 入门实例教程](http://www.ruanyifeng.com/blog/2015/03/react.html)
+2. [React Native 中文文档](http://reactnative.cn/)
+3. [antd-mobile 官方网站](https://mobile.ant.design/index-cn)
+4. [react-navigation 官方网站](https://reactnavigation.org/)
+5. [react-navigation使用技巧](http://www.jianshu.com/p/2f575cc35780)
+6. [Redux 中文文档](https://github.com/camsong/redux-in-chinese)
+7. [如何理解 Facebook 的 flux 应用架构？](https://www.zhihu.com/question/33864532/answer/57657275)
+8. [《看漫画》，学 Redux。](http://zhongjie-chen.github.io/blog/2015/09/18/%E7%9C%8B%E6%BC%AB%E7%94%BB-%E5%AD%A6-Redux/)
+9. [在react-native中使用redux](http://www.jianshu.com/p/2c43860b0532)
+10. Redux 入门教程：
+    1. [一、基本用法](http://www.ruanyifeng.com/blog/2016/09/redux_tutorial_part_one_basic_usages.html)
+    2. [二、中间件与异步操作](http://www.ruanyifeng.com/blog/2016/09/redux_tutorial_part_two_async_operations.html)
+    3. [三、React-Redux 的用法](http://www.ruanyifeng.com/blog/2016/09/redux_tutorial_part_three_react-redux.html)
+
+# 下面为自动生成的内容
+
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
 Below you'll find information about performing common tasks. The most recent version of this guide is available [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).
