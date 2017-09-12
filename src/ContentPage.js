@@ -1,62 +1,26 @@
 import React from 'react';
 import {
-    StyleSheet,
-    Text,
-    Platform,
-} from 'react-native';
-
-import {
     TabBar,
 } from 'antd-mobile';
+import {
+    addNavigationHelpers,
+} from 'react-navigation';
+import {connect} from 'react-redux';
 
-import ListPage from './order/ListPage';
-import OrderDetail from "./order/OrderDetail";
+import FirstNavigator from './navigators/FirstNavigator';
+import {changeTab} from "./actions/Tab";
 
-import FriendsScreen from './friends/FriendsScreen';
-import MyScreen from './my/MyScreen';
 
-import {StackNavigator} from 'react-navigation';
-
-const ListPageNavigator = StackNavigator({
-    ListPage: {
-        screen: ListPage,
-    },
-    OrderDetail: {
-        screen: OrderDetail,
-    },
-},{
-    initialRouteParams:{
-        goLogin:function (msg) {
-            alert(msg)
-        }
-    }
-});
-
-export default class ContentPage extends React.Component {
+class ContentPage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            selectedTab: 'blueTab',
-            hidden: false,
-        };
-    }
-    
-    componentDidMount() {
-    }
-    
-    renderContent(pageText) {
-        if (pageText == "order") {
-            return <ListPage/>;
-        } else if (pageText == "friends") {
-            return <FriendsScreen/>;
-        } else if (pageText == "my") {
-            return <MyScreen/>;
-        } else {
-            return <Text>未找到:{pageText}</Text>;
-        }
+        this.state = {};
     }
     
     render() {
+        const {dispatch} = this.props;
+        const selectTab = this.props.selectTab;
+        
         return (
             <TabBar
                 unselectedTintColor="#949494"
@@ -70,16 +34,13 @@ export default class ContentPage extends React.Component {
                     // selectedIcon={<Image source={require('./images/ca.jpg')}/>}
                     icon={require('./images/friend.png')}
                     selectedIcon={require('./images/friend_sel.png')}
-                    
-                    selected={this.state.selectedTab === 'blueTab'}
+                    selected={selectTab === 'firstTab'}
                     onPress={() => {
-                        this.setState({
-                            selectedTab: 'blueTab',
-                        });
+                        dispatch(changeTab("firstTab"))
                     }}
                     data-seed="logId"
                 >
-                    <ListPageNavigator />
+                    <FirstNavigator navigation={addNavigationHelpers({dispatch, state: this.props.NavFirstStore})}/>
                 </TabBar.Item>
                 <TabBar.Item
                     icon={require('./images/friend.png')}
@@ -87,14 +48,12 @@ export default class ContentPage extends React.Component {
                     title="朋友"
                     key="friends"
                     badge={2}
-                    selected={this.state.selectedTab === 'greenTab'}
+                    selected={selectTab === 'secondTab'}
                     onPress={() => {
-                        this.setState({
-                            selectedTab: 'greenTab',
-                        });
+                        dispatch(changeTab("secondTab"))
                     }}
                 >
-                    {this.renderContent('friends')}
+                    <FirstNavigator navigation={addNavigationHelpers({dispatch, state: this.props.NavSecondStore})}/>
                 </TabBar.Item>
                 <TabBar.Item
                     // icon={{uri: 'https://zos.alipayobjects.com/rmsportal/asJMfBrNqpMMlVpeInPQ.svg'}}
@@ -104,30 +63,25 @@ export default class ContentPage extends React.Component {
                     title="我的"
                     key="my"
                     badge={'new'}
-                    selected={this.state.selectedTab === 'yellowTab'}
+                    selected={selectTab === 'thirdTab'}
                     onPress={() => {
-                        this.setState({
-                            selectedTab: 'yellowTab',
-                        });
+                        dispatch(changeTab("thirdTab"))
                     }}
                 >
-                    {this.renderContent('my')}
+                    <FirstNavigator navigation={addNavigationHelpers({dispatch, state: this.props.NavThirdStore})}/>
                 </TabBar.Item>
             </TabBar>
         );
     }
 }
 
-let styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
-        ...Platform.select({
-            ios: {
-                paddingTop: 20
-            },
-        }),
-    },
-});
+function select(store) {
+    return {
+        NavFirstStore: store.NavFirstStore,
+        NavSecondStore: store.NavSecondStore,
+        NavThirdStore: store.NavThirdStore,
+        selectTab: store.TabStore.selectTab,
+    }
+}
+
+export default connect(select)(ContentPage);

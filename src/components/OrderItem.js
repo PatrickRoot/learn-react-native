@@ -6,7 +6,7 @@ import {
     View,
 } from 'react-native';
 
-class Order extends Component {
+class OrderItem extends Component {
     constructor(props) {
         super(props);
         this.state = {};
@@ -100,4 +100,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Order;
+export default OrderItem;

@@ -2,13 +2,13 @@ import React, {Component} from 'react';
 import {
     StyleSheet,
     TextInput,
-    Text,
     Image,
     Button,
     View,
-    AsyncStorage
 } from 'react-native';
-import {Toast} from 'antd-mobile';
+import {connect} from 'react-redux';
+import {logIn} from "./actions/User";
+//将我们的页面和action链接起来
 
 const LoginStyles = StyleSheet.create({
     loginview: {
@@ -35,43 +35,11 @@ class LoginPage extends Component {
     }
     
     onPressCallback() {
-        var that = this;
-        let formData = new FormData();
-        formData.append("username", this.state.username);
-        formData.append("password", this.state.password);
-        
-        var fetchOptions = {
-            method: 'POST',
-            headers: {
-                'accessToken': '',
-                'client': 'mobile',
-                'version': '0.0.1',
-                'deviceId': '1234567890',
-                'latitude': '123',
-                'longitude': '101',
-                'Accept': 'application/json',
-                'Content-Type': 'multipart/form-data'
-            },
-            body: formData
-        };
-        var url = "https://testbid.zcjb.com.cn/api/mem/login.htm";
-        // var url = "http://192.168.1.62:8000/api/mem/login.htm";
-        
-        fetch(url, fetchOptions)
-            .then((response) => response.text())
-            .then((responseText) => {
-                var data = JSON.parse(responseText);
-                if (data.errCode == 1) {
-                    AsyncStorage.setItem("accessToken", data.accessToken, function (errs) {
-                        if (errs) {
-                            Toast.fail("保存登录信息失败", 1);
-                        }
-                    });
-                    that.props.loginSuccess();
-                } else {
-                    Toast.fail(data.errMsg, 1);
-                }
-            }).done();
+        const {dispatch} = this.props;
+        dispatch(logIn({
+            "username": this.state.username,
+            "password": this.state.password,
+        }))
     }
     
     render() {
@@ -106,4 +74,10 @@ class LoginPage extends Component {
     }
 }
 
-export default LoginPage;
+function select(store) {
+    return {
+        isLoggedIn: store.UserStore.isLoggedIn,
+    }
+}
+
+export default connect(select)(LoginPage);
